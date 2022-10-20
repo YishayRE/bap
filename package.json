@@ -1,0 +1,37 @@
+{
+    "name": "bap",
+    "version": "1.0.0",
+    "description": "NodeJS bap",
+    "main": "app.js",
+    "type": "module",
+    "scripts": {
+        "dev": "nodemon app.js",
+        "start": "node app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/YishayRE/NodeJSDesing.git"
+    },
+    "keywords": [
+        "NodeJS",
+        "Express.js",
+        "REST",
+        "Server",
+        "API"
+    ],
+    "author": "YishayRE",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/YishayRE/NodeJSDesing/issues"
+    },
+    "homepage": "https://github.com/YishayRE/NodeJSDesing#readme",
+    "dependencies": {
+        "colors": "^1.4.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.2",
+        "express": "^4.18.1",
+        "express-fileupload": "^1.4.0",
+        "express-validator": "^6.14.2",
+        "mysql": "^2.18.1"
+    }
+}
