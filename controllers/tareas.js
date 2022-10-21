@@ -83,7 +83,7 @@ const crearTarea = async(req = request, res = response) => {
         idTarea = tarea.insertId;
 
         // Crear los nuevos tags
-        if(tags.length > 0) {
+        if(tags && tags.length > 0) {
             const tagsTarea = tags.map(async tag => {
                 const tagNuevo = { tag: tag, tareaId: tarea.insertId };
                 
@@ -110,7 +110,7 @@ const crearTarea = async(req = request, res = response) => {
 
         return res.status(200).json({
             tarea: tarea.insertId,
-            tags: (tags.length > 0) ? tagsNuevos.map(tag => {
+            tags: (tags && tags.length > 0) ? tagsNuevos.map(tag => {
                 if(tag.insertId)
                     return tag.insertId
                 else
@@ -144,8 +144,22 @@ const actualizarTarea = async(req = request, res = response) => {
         let tagsNuevos;
         let comentariosNuevos;
 
-        const tarea = await services.mysql.putTabla(bd, 'Tarea', id, { titulo, descripcion, estatusComplecion, fechaEntrega, responsable });
-        console.log(tarea);
+        const perteneceTarea = await services.mysql.getTabla(bd, 'Tarea', '*', `usuarioId = ? AND id = ?`, [usuario, id]);
+
+        if(perteneceTarea.length === 0){
+            bd.close();
+
+            throw new Error('La tarea no pertenece al usuario');
+        }
+
+        const tarea = await services.mysql.putTabla(bd, 'Tarea', id, { 
+            titulo, 
+            descripcion, 
+            estatusComplecion, 
+            fechaEntrega, 
+            responsable
+        });
+
         if(tarea.msg){
             bd.close();
 
@@ -153,7 +167,7 @@ const actualizarTarea = async(req = request, res = response) => {
         }
 
         // Eliminar tags y crear los nuevos tags
-        if(tags.length > 0) {
+        if(tags && tags.length > 0) {
             await services.mysql.delTabla(bd, 'Tag', null, `tareaId = ?`, [id]);
 
             const tagsTarea = tags.map(async tag => {
@@ -182,7 +196,7 @@ const actualizarTarea = async(req = request, res = response) => {
 
         return res.status(200).json({
             tarea: id,
-            tags: (tags.length > 0) ? tagsNuevos.map(tag => {
+            tags: (tags && tags.length > 0) ? tagsNuevos.map(tag => {
                 if(tag.insertId)
                     return tag.insertId
                 else

@@ -37,12 +37,12 @@ class BD {
         const __dirname = path.resolve();
         const read = fs.readFileSync(__dirname + '/database/db.sql', 'utf8');
         const queries = read.split(';');
-        queries.pop();
-        const tablas = await queries.map(async query => {
-            return await this.pool.query(query + ';');
-        });
+        const respuestas = [];
+        respuestas.push(await this.pool.query(queries[0]));
+        respuestas.push(await this.pool.query(queries[1]));
+        respuestas.push(await this.pool.query(queries[2]));
+        respuestas.push(await this.pool.query(queries[3]));
 
-        const respuestas = await Promise.all(tablas);
         respuestas.map(resp => {
             if(resp.warningCount === 0)
                 console.log('Tabla creada'.green);

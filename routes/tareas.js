@@ -41,17 +41,19 @@ router.post('/', [
 //  editar una tarea
 router.put('/', [
     check('usuario', 'El usuario es obligatorio').isInt().notEmpty(),
+    check('usuario').custom( helpers.dbValidators.existeUsuarioPorId ),
+    check('id', 'El id de la tarea es obligatoria').isInt().notEmpty(),
+    check('id').custom( helpers.dbValidators.existeTareaPorId ),
     middlewares.validarCampos.validarCampos,
-    check('tarea', 'El id de la tarea es obligatoria').isInt().notEmpty(),
-    check('tarea').custom( helpers.dbValidators.existeTareaPorId ),
 ], tareas.actualizarTarea);
 
 //  eliminar una tarea
 router.delete('/', [
     check('usuario', 'El usuario es obligatorio').isInt().notEmpty(),
-    middlewares.validarCampos.validarCampos,
+    check('usuario').custom( helpers.dbValidators.existeUsuarioPorId ),
     check('tarea', 'El id de la tarea es obligatoria').isInt().notEmpty(),
     check('tarea').custom( helpers.dbValidators.existeTareaPorId ),
+    middlewares.validarCampos.validarCampos,
 ], tareas.eliminarTarea);
 
 export { router };

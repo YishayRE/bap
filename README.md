@@ -78,6 +78,7 @@ Tambien se requiere tener MySQL en caso de querer una db local.
 git clone https://github.com/YishayRE/bap.git
 cd bap
 ```
+Recuerda tener un usuario creado previamente en la db.
 
 ### Instalación <a name = "instalacion"></a>
 
@@ -103,12 +104,16 @@ npm run dev
 Antes de usar, se deben ingresar las variables al archivo example.env y renombrarlo a .env, tras ello, ejecutarlo como dev o prod.
 No es necesario tener la db creada, al correr el API esta creará la db a partir del archivo database/db.sql y creará todo lo que necesita para trabajar.
 
+Lee la siguiente documentación para estar al tanto de esta API:
+https://documenter.getpostman.com/view/15102974/2s84DiykKA
+Tambien puedes acceder a ella entrando a la ruta principal de la API.
+
 ## ⛏️ Construido con <a name = "tech_stack"></a>
 
 - [MySQL](https://dev.mysql.com/) - Database
 - [NodeJs](https://nodejs.org/en/) - Server Environment
 - [Express](https://expressjs.com/) - Server Framework
-- [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript) - Web Framework
+- [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript) - Lenguage
 
 ## ✍️ Autores <a name = "authors"></a>
 
